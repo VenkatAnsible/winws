@@ -1,7 +1,7 @@
 ---
 - name: First Playbook for windows
-  hosts: windows
-  become: yes
+  hosts: all
+ 
   tasks:
     - name: Install IIS (Web-Server only)
       win_feature:
