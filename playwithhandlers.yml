@@ -26,7 +26,7 @@
     
     - name: create a home page
       win_copy:
-        content: "Created a page using automation for windows hosts"
+        content: "Created a page using automation for windows with web content update"
         dest: C:\Inetpub\wwwroot\index.html
       notify: restart web
   handlers:
