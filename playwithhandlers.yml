@@ -1,0 +1,36 @@
+---
+- name: First Playbook for windows
+  hosts: all
+ 
+  tasks:
+    - name: Install IIS (Web-Server only)
+      win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Set service startup mode to auto and ensure it is started
+      win_service:
+        name: W3Svc
+        start_mode: auto
+        state: started
+
+    - name: Firewall rule to allow http on TCP port 80
+      win_firewall_rule:
+        name: HTTP
+        localport: 80
+        action: allow
+        direction: in
+        protocol: tcp
+        state: present
+        enabled: yes
+    
+    - name: create a home page
+      win_copy:
+        content: "Created a page using automation for windows hosts"
+        dest: C:\Inetpub\wwwroot\index.html
+
+    - name: restart web server service
+      win_service: 
+        name: W3Svc
+        state: restarted 
+...
